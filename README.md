@@ -58,8 +58,8 @@ python inference.py
 ```
 
 ## Model Training
-1. Follow the [LLaVA-NeXT](https://github.com/LLaVA-VL/LLaVA-NeXT/blob/main/docs/LLaVA_Video_1003.md) codebase to prepare the training data (e.g., [LLaVA-Video-178K](https://huggingface.co/datasets/lmms-lab/LLaVA-Video-178K)).
-Update the [exp.yaml](BIMBA-LLaVA-NeXT/scripts/video/train/exp.yaml) file to point to your data.
+1. Follow the [LLaVA-NeXT](https://github.com/LLaVA-VL/LLaVA-NeXT/blob/main/docs/LLaVA_Video_1003.md) codebase to prepare the training data (e.g., [LLaVA-Video-178K](https://huggingface.co/datasets/lmms-lab/LLaVA-Video-178K)). I trained on the subset of the LLaVA-Video-178K that contains videos of 1-2m and 2-3m. 
+Update the [exp_small.yaml](BIMBA-LLaVA-NeXT/scripts/video/train/exp_small.yaml) file to point to your data.
 2. Follow the commands below to train BIMBA model:
 ```bash
 cd BIMBA-LLaVA-NeXT
