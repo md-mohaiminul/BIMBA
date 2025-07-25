@@ -961,18 +961,6 @@ class LazySupervisedDataset(Dataset):
         self.tokenizer = tokenizer
         self.list_data_dict = []
 
-        rank0_print(f"yt_metadata: /mnt/meg/mmiemon/datasets/YTScam/YTscam_metadata_frames_32.json")
-        with open('/mnt/meg/mmiemon/datasets/YTScam/YTscam_metadata_frames_32.json', 'r') as f:
-            self.yt_metadata = json.load(f)
-        # if 'yt_scam' in data_path and '100f' in data_path:
-        #     rank0_print(f"yt_metadata: /mnt/meg/mmiemon/datasets/YTScam/YTscam_metadata_frames_100.json")
-        #     with open('/mnt/meg/mmiemon/datasets/YTScam/YTscam_metadata_frames_100.json', 'r') as f:
-        #         self.yt_metadata = json.load(f)
-        # elif 'yt_scam' in data_path:
-        #     rank0_print(f"yt_metadata: /mnt/meg/mmiemon/datasets/YTScam/YTscam_metadata_w_crypto.json")
-        #     with open('/mnt/meg/mmiemon/datasets/YTScam/YTscam_metadata_w_crypto.json', 'r') as f:
-        #         self.yt_metadata = json.load(f)
-
         # Handle multiple JSON files specified in the data_path
         if "{" in data_path and "}" in data_path:
             base_path, file_pattern = re.match(r"^(.*)\{(.*)\}\.json$", data_path).groups()
@@ -1218,25 +1206,7 @@ class LazySupervisedDataset(Dataset):
                                 video.append(frame)
                         except IOError:
                             print(f"Failed to read frame at path: {frame_path}")
-                elif "YTScam" in video_file:
-                    yt_metdata = self.yt_metadata[self.list_data_dict[i]["video"]]
-                    video_time = yt_metdata['video_time']
-                    frame_time = yt_metdata['frame_time']
-                    num_frames_to_sample = yt_metdata['num_frames_to_sample']
-                    images = sorted(os.listdir(video_file))
-                    num_frames = len(images)
-                    if num_frames > num_frames_to_sample:
-                        step = num_frames / num_frames_to_sample
-                        images = [images[int(i * step)] for i in range(num_frames_to_sample)]
-                    video = []
-                    for image in images:
-                        try:
-                            frame_path = os.path.join(video_file, image)
-                            with Image.open(frame_path) as img:
-                                frame = img.convert("RGB")
-                                video.append(frame)
-                        except IOError:
-                            print(f"Failed to read frame at path: {frame_path}")
+                
                 elif "moviechat" in video_file:
                     total_frame_num = self.list_data_dict[i]["num_frame"]
                     avg_fps = self.list_data_dict[i]["fps"]

@@ -3,7 +3,7 @@
 # Set up the data folder
 IMAGE_FOLDER="XXX"
 VIDEO_FOLDER="XXX"
-DATA_YAML="XXX" # e.g exp.yaml, exp_small.yaml
+DATA_YAML="exp_small.yaml" # e.g exp.yaml, exp_small.yaml
 
 ############### Prepare Envs #################
 # python3 -m pip install flash-attn --no-build-isolation
